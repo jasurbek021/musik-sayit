@@ -1,6 +1,6 @@
 const audio = document.querySelector(".audio"),
   container = document.querySelector(".container"),
-  progressContainer = document.querySelector(".progress-container"),
+  progressContainer = document.querySelector(".progress__container"),
   progress = document.querySelector(".progress"),
   playBtn = document.querySelector(".play"),
   prevBtn = document.querySelector(".prev"),
@@ -8,16 +8,20 @@ const audio = document.querySelector(".audio"),
   nextBtn = document.querySelector(".next"),
   rangeEl = document.querySelector(".range"),
   volumeValue = document.querySelector(".volume-value"),
+  currentTimeEl = document.querySelector(".current-time"),
+  durationEl = document.querySelector(".duration"),
+  voiseWrapper = document.querySelector(".voise__wrapper"),
   title = document.querySelector(".song");
-
 // content
 
 audio.volume = 0.5;
 volumeValue.textContent = 50;
 
-const songs = ["odamlar-nma-deydi", 
-"konsta-shokir-ertasi-yoq",
-"Konsta - Insonlar (Official Music Video)"];
+const songs = [
+  "odamlar-nma-deydi",
+  "konsta-shokir-ertasi-yoq",
+  "Konsta - Insonlar (Official Music Video)",
+];
 
 let currentSong = 0;
 
@@ -29,12 +33,12 @@ const changeyMusic = (a) => {
 
 const playMusic = () => {
   container.classList.add("play");
-  playBtn.innerHTML = `<i class="fa-solid fa-pause"></i>`;
+  playBtn.innerHTML = `<i class="fa-solid fa-pause controller"></i>`;
   audio.play();
 };
 const pauseMusic = () => {
   container.classList.remove("play");
-  playBtn.innerHTML = `<i class="fa-solid fa-play"></i>`;
+  playBtn.innerHTML = `<i class="fa-solid fa-play controller"></i>`;
   audio.pause();
 };
 
@@ -74,6 +78,13 @@ const changeValue = () => {
   volumeValue.textContent = rangeEl.value;
 };
 
+// const changeVolume = () => {
+//   if (volumeValue.textContent == 80) {
+//     voiseWrapper.innerHTML.remove(<i class="fa-solid fa-volume-low"></i>);
+//     voiseWrapper.innerHTML.add(<i class="fa-solid fa-volume-high"></i>);
+//   }
+// };
+
 const changeProgress = (e) => {
   const currentTime = e.target.currentTime;
   let duration = e.target.duration;
@@ -90,6 +101,19 @@ const setProgress = (e) => {
   audio.currentTime = (clickX / widthP) * duration;
 };
 
+const formatTime = (time) => {
+  const minutes = Math.floor(time / 60);
+  const seconds = Math.floor(time % 60);
+  return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+};
+
+const updateDuration = () => {
+  durationEl.textContent = formatTime(audio.duration);
+  setInterval(() => {
+    currentTimeEl.textContent = formatTime(audio.currentTime);
+  });
+};
+
 // events
 
 playBtn.addEventListener("click", play);
@@ -98,3 +122,4 @@ prevBtn.addEventListener("click", prev);
 rangeEl.addEventListener("input", changeValue);
 audio.addEventListener("timeupdate", changeProgress);
 progressContainer.addEventListener("click", setProgress);
+audio.addEventListener("loadedmetadata", updateDuration);

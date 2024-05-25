@@ -16,6 +16,9 @@
   <body>
     <div class="container">
       <div class="player">
+        <div class="title">
+          <a href="https://www.youtube.com/@web_jasur"> <p>WEB JASUR</p></a>
+        </div>
         <div class="cover">
           <img
             class="cover-img"
@@ -31,24 +34,35 @@
           src="./musics/konsta-shokir-ertasi-yoq.mp3"
         ></audio>
         <div class="song"><h2>konsta-shokir-ertasi-yoq</h2></div>
+        <div class="time">
+          <span class="current-time">0:00</span>
+          <span class="duration">0:00</span>
+        </div>
         <div class="progress__container">
           <div class="progress"></div>
         </div>
         <div class="buttons">
           <div class="buttons-wrapper">
             <div class="btn prev">
-              <i class="fa-solid fa-backward-fast"></i>
+              <i class="fa-solid fa-backward-fast controller"></i>
             </div>
-            <div class="btn play"><i class="fa-solid fa-play img-src"></i></div>
-            <div class="btn next"><i class="fa-solid fa-forward-fast"></i></div>
+            <div class="btn play">
+              <i class="fa-solid fa-play img-src controller"></i>
+            </div>
+            <div class="btn next">
+              <i class="fa-solid fa-forward-fast controller"></i>
+            </div>
           </div>
         </div>
         <div class="sound-wrapper">
           <div class="span-wrapper">
-            <span>Voise</span>
+            <span>Voise :</span>
             <span class="volume-value">100</span>
           </div>
-          <input class="range" type="range" min="0" max="100" step="1" />
+          <div class="voise__wrapper">
+            <i class="fa-solid fa-volume-low"></i>
+            <input class="range" type="range" min="0" max="100" step="1" />
+          </div>
         </div>
       </div>
     </div>
